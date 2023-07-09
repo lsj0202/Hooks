@@ -26,7 +26,7 @@ const MainItems = () => {
         .get('https://codingapple1.github.io/shop/data2.json')
         .then((response) => {
           const newData = response.data;
-          setAxiosData([...axiosData, ...newData]);
+          setAxiosData((prev) => [...prev, ...newData]);
         })
         .catch((error) => {
           console.log(error);
@@ -40,7 +40,7 @@ const MainItems = () => {
         .get('https://codingapple1.github.io/shop/data3.json')
         .then((response) => {
           const newData = response.data;
-          setAxiosData([...axiosData, ...newData]);
+          setAxiosData((prev) => [...prev, ...newData]);
         })
         .catch((error) => {
           console.log(error);
