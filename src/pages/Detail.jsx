@@ -5,7 +5,7 @@ import { useRecoilState, useRecoilValue } from 'recoil';
 import { dataState } from '../recoil/data';
 
 const Detail = () => {
-  const [atomData, setAtomData] = useRecoilState(dataState);
+  const atomData = useRecoilValue(dataState);
 
   const { id } = useParams();
   const productId = Number(id);
@@ -20,7 +20,7 @@ const Detail = () => {
       clearTimeout(timer);
     };
   }, []);
-  
+
   const product = atomData.find((item) => item.id === productId);
 
   return (
