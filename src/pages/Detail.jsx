@@ -22,13 +22,16 @@ const Detail = () => {
       setFade('end')
     }, 100)
 
-    return () => {
-      clearTimeout(timer);
-      clearTimeout(divFade);
-    };
+    let outPut = localStorage.getItem('watched')
+    outPut = JSON.parse(outPut)
+    outPut.push(productId)
+
+    //Set으로 바꿨다가 다시 array로 만들기
+    outPut = new Set(outPut)
+    outPut = Array.from(outPut)
+    localStorage.setItem('watched', JSON.stringify(outPut))
+
   }, []);
-
-
 
   return (
     <div className={`start ${fade}`}>

@@ -5,7 +5,7 @@ import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import { dataState } from '../recoil/data';
 
-const MainItems = () => {
+const MainItems = ({ show }) => {
   const [atomData, setAtomData] = useRecoilState(dataState);
   const router = useNavigate();
   const [sortedData, setSortedData] = useState([...atomData]);
@@ -60,6 +60,22 @@ const MainItems = () => {
 
   return (
     <div className="container">
+      <div>
+        <p>최근 본 상품</p>
+        {show.map((productId) => {
+          const product = axiosData.find((ele) => ele.id === productId);
+          if (!product) return null;
+
+          return (
+            <div key={product.id}>
+              <img src={`https://codingapple1.github.io/shop/shoes${product.id + 1}.jpg`} alt="img" width="10%" />
+              <h4>{product.title}</h4>
+              <p>{product.content}</p>
+              <p>{product.price}</p>
+            </div>
+          );
+        })}
+      </div>
       <Button variant="outline-secondary" onClick={handleSort}>
         정렬
       </Button>
@@ -75,8 +91,9 @@ const MainItems = () => {
             <p>{ele.price}</p>
             <Button
               variant="outline-secondary"
-              onClick={() => {
+              onClick={(e) => {
                 router(`/detail/${ele.id}`);
+                e.preventDefault();
               }}
             >
               상품 자세히 보기
