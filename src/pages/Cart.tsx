@@ -1,10 +1,11 @@
 import { Table } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
+import { RootState } from "../store";
 import Button from 'react-bootstrap/Button';
 import { incrementCount, addItem, removeItem} from "../store";
 
 const Cart = () => {
-  const user = useSelector((state) => state.user);
+  const user = useSelector((state: RootState) => state.user);
   const dispatch = useDispatch()
 
   console.log(user);
